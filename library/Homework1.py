@@ -39,16 +39,3 @@ def main():
 
 #b. Data Formatting
 
-
-
-
-
-
-
-
-
-
-# Insert the data into the Member model
-df.to_sql('Member', engine, if_exists='replace', index=False)
-
-print("Data imported successfully")
