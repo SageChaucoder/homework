@@ -38,13 +38,9 @@ def clean_categorical_data(df, column):
 
     return df
 
-# Save the cleaned data
+    # Save the cleaned data
 def save_data(df, output_file_path):
-    try:
-        df.to_csv(output_file_path, index=False)
-        print(f"Cleaned data saved to {output_file_path}.")
-    except Exception as e:
-        print(f"An error occurred while saving the file: {e}")
+    df.to_csv(output_file_path, index=False)
 
 # Main function
 def main():
@@ -63,7 +59,7 @@ def main():
 
         # Save the cleaned data
         save_data(cleaned_df, output_file)
-
+        
 # Example usage
 if __name__ == "__main__":
     main()
