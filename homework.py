@@ -8,47 +8,62 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'library.settings')
 django.setup()
 
-# Create a connection to the database
-engine = create_engine('sqlite:///db.sqlite3')
+# Load the dataset
+def load_data(file_path):
+    try:
+        return pd.read_csv(file_path)
+    except FileNotFoundError:
+        print(f"Error: The file {file_path} was not found.")
+        return None
+    except pd.errors.EmptyDataError:
+        print("Error: The file is empty.")
+        return None
+    except pd.errors.ParserError:
+        print("Error: The file could not be parsed. Please check the file format.")
+        return None
 
-#a. Data Import and Data Cleansing
-# Load the CSV file into a pandas DataFrame 
+# Cleansing function
+def clean_data(df):
+    # Remove duplicates
+    df = df.drop_duplicates()
 
+    # Fill missing values with "Unknown"
+def clean_categorical_data(df, column):
+    # Fill missing values with "Unknown"
+    df[column].fillna('Unknown', inplace=True)
+
+    # Standardize text
+    for column in df.select_dtypes(include=['object']).columns:
+        df[column] = df[column].str.strip()  # Trim whitespace
+
+    return df
+
+# Save the cleaned data
+def save_data(df, output_file_path):
+    try:
+        df.to_csv(output_file_path, index=False)
+        print(f"Cleaned data saved to {output_file_path}.")
+    except Exception as e:
+        print(f"An error occurred while saving the file: {e}")
+
+# Main function
 def main():
-    filePath = input("Please paste your .csv path here: ") #User type in the csv file path
-        
-    # Read the CSV file into a DataFrame
-    df = pd.read_csv(filePath)
+    # Prompt the user for the input file path
+    input_file = input("Please enter the path of the CSV file you want to import: ")
+    
+    # Load the data
+    df = load_data(input_file)
+    
+    if df is not None:
+        # Clean the data
+        cleaned_df = clean_data(df)
 
-    # Extract file name without extension for table name
-    table_name = os.path.splitext(os.path.basename(filePath))[0]
+        # Prompt for the output file path
+        output_file = input("Please enter the desired output file name (e.g., cleaned_data.csv): ")
 
-    # Data Cleansing
-    # Perform data cleansing (remove duplicates)
-    df.drop_duplicates(inplace=True)
-    # df.fillna(df.mean(), inplace=True)  # Fill in N/A data
+        # Save the cleaned data
+        save_data(cleaned_df, output_file)
 
-    print("Data cleansing complete. Here is the cleansed data:")
-    print(df.head())  # Display the first few rows of the cleansed data
-
-    saveCSV = input("Do you want to save your cleansed data file? 1 = Yes, 2 = No: ")
-    if saveCSV == "1":
-            output_path = 'cleansed_data.csv'
-    df.to_csv(output_path, index=False)
-    print(f"Cleansed data saved to {output_path}")
-
-#b. Data Formatting
-
-
-
-
-
-
-
-
-
-
-# Insert the data into the Member model
-df.to_sql('Member', engine, if_exists='replace', index=False)
-
-print("Data imported successfully")
+# Example usage
+if __name__ == "__main__":
+    main()
