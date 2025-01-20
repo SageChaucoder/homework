@@ -43,10 +43,9 @@ def clean_data(df):
         print("Error: DataFrame is None")
         return None
 
-def save_data(df, output_file_path):
-    if df is not None:
-        df.to_csv(output_file_path, index=False)
-        print(f"Data saved to {output_file_path}")
+def save_data(cleaned_df, output_file_name):
+    cleaned_df.to_csv(output_file_name, index=False)
+    print(f"Data saved to {output_file_name}")
 
 # Main function
 def main():
@@ -57,14 +56,14 @@ def main():
     df = load_data(input_file)
 
     if df is not None:
-        # Clean the data
-        cleaned_df = clean_data(df)
+    # Clean the data
+            cleaned_df = clean_data(df)
 
-        # Prompt for the output file path
-        output_file = input("Please enter the desired output file name (e.g., cleaned_data.csv): ")
+    # Prompt for the output file path
+    output_file_name = input("Please enter the desired output file name (e.g., cleaned_data.csv): ")
 
-        # Save the cleaned data
-        save_data(cleaned_df, output_file)
+    # Save the cleaned data
+    save_data(cleaned_df, output_file_name)
 
 # Example usage
 if __name__ == "__main__":
