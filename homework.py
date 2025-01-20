@@ -3,6 +3,7 @@ from sqlalchemy import create_engine, text
 import os
 import csv
 import django
+import sys
 
 # Set up Django environment
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'library.settings')
@@ -17,13 +18,15 @@ def load_data(file_path):
         return pd.read_csv(file_path)
     except FileNotFoundError:
         print(f"Error: The file {file_path} was not found.")
-        return None
+        sys.exit(1)  # Exit the program with a status code
+    
     except pd.errors.EmptyDataError:
         print("Error: The file is empty.")
-        return None
+        sys.exit(1)   # Exit the program with a status code
+    
     except pd.errors.ParserError:
         print("Error: The file could not be parsed. Please check the file format.")
-        return None
+        sys.exit(1)   # Exit the program with a status code
 
 # Cleansing function
 def clean_data(df):
@@ -57,7 +60,7 @@ def main():
 
     if df is not None:
     # Clean the data
-            cleaned_df = clean_data(df)
+        cleaned_df = clean_data(df)
 
     # Prompt for the output file path
     output_file_name = input("Please enter the desired output file name (e.g., cleaned_data.csv): ")
