@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+from sqlalchemy import create_engine, text
 import os
 import csv
 import django
@@ -27,6 +29,11 @@ def clean_data(df):
     df = df.drop_duplicates()
 
     # Fill missing values with "Unknown"
+def clean_categorical_data(df, column):
+    # Fill missing values with "Unknown"
+    df[column].fillna('Unknown', inplace=True)
+
+    # Standardize text
     for column in df.select_dtypes(include=['object']).columns:
         df[column] = df[column].str.strip()  # Trim whitespac
     return df
@@ -53,12 +60,28 @@ def main():
         # Prompt for the output file path
         output_file = input("Please enter the desired output file name (e.g., cleaned_data.csv): ")
 
-        # Save the cleaned data
-        def save_data (cleaned_df, output_file):
-            if cleaned_df is not None:
-                cleaned_df.to_csv(output_file, index=False)
-            else:
-                print("Error: DataFrame is None")   
+# Apply the cleansing and formatting function to the DataFrame
+def cleanse_and_format_data(df):
+    cleaned_df = cleanse_and_format_data(df)
+
+# Define a function to save the cleansed and formatted data to a CSV file
+def save_data(df, filename):
+    if df is not None:
+        df.to_csv(filename, index=False)
+        print(f"Data saved to {filename}")
+    else:
+        print("Error: DataFrame is None")
+
+# Save the cleansed and formatted DataFrame to 'cleaned_data.csv'
+def save_data(df, filename):
+    save_data(cleaned_df, {filename})
+
+# Output the cleansed and formatted DataFrame
+def print_data(df):
+    if df is not None:
+        print(df)
+    else:
+        print("Error: DataFrame is None")
         
 # Example usage
 if __name__ == "__main__":
