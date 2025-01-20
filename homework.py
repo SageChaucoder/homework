@@ -1,5 +1,4 @@
 import pandas as pd
-from sqlalchemy import create_engine, text
 import os
 import csv
 import django
@@ -28,19 +27,16 @@ def clean_data(df):
     df = df.drop_duplicates()
 
     # Fill missing values with "Unknown"
-def clean_categorical_data(df, column):
-    # Fill missing values with "Unknown"
-    df[column].fillna('Unknown', inplace=True)
-
-    # Standardize text
     for column in df.select_dtypes(include=['object']).columns:
-        df[column] = df[column].str.strip()  # Trim whitespace
-
+        df[column] = df[column].str.strip()  # Trim whitespac
     return df
 
     # Save the cleaned data
-def save_data(df, output_file_path):
-    df.to_csv(output_file_path, index=False)
+    def save_data(df, filename):
+        if df is not None:
+            df.to_csv (filename, index=False)
+        else:
+            print("Error: DataFrame is None")
 
 # Main function
 def main():
@@ -58,7 +54,11 @@ def main():
         output_file = input("Please enter the desired output file name (e.g., cleaned_data.csv): ")
 
         # Save the cleaned data
-        save_data(cleaned_df, output_file)
+        def save_data (cleaned_df, output_file):
+            if cleaned_df is not None:
+                cleaned_df.to_csv(output_file, index=False)
+            else:
+                print("Error: DataFrame is None")   
         
 # Example usage
 if __name__ == "__main__":
