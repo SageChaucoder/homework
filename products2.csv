@@ -1,21 +1,21 @@
 Name,Category,Price,Quantity
-Laptop,Electronics,999.99,50
-Smartphone,Electronics,599.99,150
-Headphones,Accessories,199.99,75
-Desk,Furniture,299.99,30
-Chair,Furniture,149.99,100
-Monitor,Electronics,399.99,60
-Keyboard,Accessories,49.99,200
-Mouse,Accessories,29.99,180
-Coffee Maker,Appliances,89.99,40
-Blender,Appliances,59.99,70
-TV,Electronics,799.99,25
-Tablet,Electronics,399.99,90
-Sofa,Furniture,999.99,15
-Book,Stationery,19.99,500
-Pencil,Stationery,1.99,1000
-Notebook,Stationery,5.99,300
-Camera,Electronics,499.99,20
-Smartwatch,Electronics,199.99,80
-Air Conditioner,Appliances,499.99,10
-Refrigerator,Appliances,999.99,5
+Laptop,Electronics,,
+Smartphone,Electronics,,
+Headphones,Accessories,,
+Desk,Furniture,,
+Unknown,Furniture,,
+Monitor,Electronics,,
+Keyboard,Accessories,,
+Mouse,Accessories,,
+Coffee Maker,Appliances,,
+Blender,Appliances,,
+TV,Electronics,Unknown,
+Tablet,Electronics,,
+Sofa,Furniture,,
+Book,Stationery,,
+Pencil,Stationery,,Unknown
+Notebook,Stationery,,
+Camera,Electronics,,
+Smartwatch,Electronics,Unknown,
+Air Conditioner,Appliances,,
+Refrigerator,Unknown,,

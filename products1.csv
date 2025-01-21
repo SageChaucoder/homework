@@ -1,21 +1,21 @@
-Name,Category,Price,Quantity,Unnamed: 4
-Laptop,Electronics,999.99,50,Unknown
-Smartphone,Electronics,599.99,150,Unknown
-Headphones,Accessories,199.99,75,Unknown
-Desk,Furniture,299.99,30,Unknown
-Chair,Furniture,149.99,100,Unknown
-Monitor,Electronics,399.99,60,Unknown
-Keyboard,Accessories,49.99,200,Unknown
-Mouse,Accessories,29.99,180,Unknown
-Coffee Maker,Appliances,89.99,40,Unknown
-Blender,Appliances,59.99,70,Unknown
-TV,Electronics,799.99,25,Unknown
-Tablet,Electronics,399.99,90,Unknown
-Sofa,Furniture,999.99,15,Unknown
-Book,Stationery,19.99,500,Unknown
-Pencil,Stationery,1.99,1000,Unknown
-Notebook,Stationery,5.99,300,Unknown
-Camera,Electronics,499.99,20,Unknown
-Smartwatch,Electronics,199.99,80,Unknown
-Air Conditioner,Appliances,499.99,10,Unknown
-Refrigerator,Appliances,999.99,5,Unknown
+Name,Category,Price,Quantity
+Laptop,Electronics,999.99,50.0
+Smartphone,Electronics,599.99,150.0
+Headphones,Accessories,199.99,75.0
+Desk,Furniture,299.99,30.0
+Unknown,Furniture,149.99,100.0
+Monitor,Electronics,399.99,60.0
+Keyboard,Accessories,49.99,200.0
+Mouse,Accessories,29.99,180.0
+Coffee Maker,Appliances,89.99,40.0
+Blender,Appliances,59.99,70.0
+TV,Electronics,,25.0
+Tablet,Electronics,399.99,90.0
+Sofa,Furniture,999.99,15.0
+Book,Stationery,19.99,500.0
+Pencil,Stationery,1.99,
+Notebook,Stationery,5.99,300.0
+Camera,Electronics,499.99,20.0
+Smartwatch,Electronics,,80.0
+Air Conditioner,Appliances,499.99,10.0
+Refrigerator,Unknown,999.99,5.0

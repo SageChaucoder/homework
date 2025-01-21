@@ -16,6 +16,6 @@ Book,Stationery,19.99,500
 Pencil,Stationery,1.99,
 Notebook,Stationery,5.99,300
 Camera,Electronics,499.99,20
-Smartwatch,Electronics,199.99,80
+Smartwatch,Electronics,,80
 Air Conditioner,Appliances,499.99,10
-Refrigerator,Appliances,999.99,5
+Refrigerator,,999.99,5

@@ -1,6 +1,7 @@
 import pandas as pd
 from sqlalchemy import create_engine, text
 import os
+import psycopg2
 import csv
 import django
 import sys
@@ -11,8 +12,9 @@ django.setup()
 
 from django.contrib import admin
 from django.contrib.auth.models import User
+from models import Members, Product, Employee
 
-# Load the dataset
+# Load the dataset, csv file
 def load_data(file_path):
     try:
         return pd.read_csv(file_path)
@@ -36,6 +38,11 @@ def clean_data(df):
 
         # Fill missing values with "Unknown" for object columns
         for column in df.select_dtypes(include=['object']).columns:
+            df[column].fillna('Unknown', inplace=True)
+        
+        # Fill missing values in numerical columns (both integers and floats) with "Unknown"
+        for column in df.select_dtypes(include=['number']).columns:
+            df[column] = df[column].astype('object')  # Convert to object type
             df[column].fillna('Unknown', inplace=True)
 
         # Standardize text for object columns
@@ -71,3 +78,70 @@ def main():
 # Example usage
 if __name__ == "__main__":
     main()
+
+    def import_data_to_postgres(csv_file_path, table_name, db_config):
+    #
+    Imports data from a CSV file into a PostgreSQL table.
+
+    Args:
+        csv_file_path (str): Path to the CSV file.
+        table_name (str): Name of the target PostgreSQL table.
+        db_config (dict): Database configuration dictionary with keys 'dbname', 'user', 'password', 'host', and 'port'.
+    #
+    try:
+        # Connect to the PostgreSQL database
+        conn = psycopg2.connect(
+            dbname=db_config['dbname'],
+            user=db_config['user'],
+            password=db_config['password'],
+            host=db_config['host'],
+            port=db_config['port']
+        )
+        cursor = conn.cursor()
+
+        # Open the CSV file
+        with open(csv_file_path, 'r') as f:
+            reader = csv.reader(f)
+            next(reader)  # Skip the header row
+
+            # Insert data into the table
+            for row in reader:
+                cursor.execute(f"""
+                    INSERT INTO {table_name} (column1, column2, column3) -- adjust column names as necessary
+                    VALUES (%s, %s, %s)
+                """, row)
+
+        # Commit the transaction
+        conn.commit()
+
+        print("Data imported successfully!")
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        if conn:
+            conn.rollback()
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
+if __name__ == "__main__":
+    # Define the path to your CSV file
+    csv_file_path = 'path/to/your/file.csv'
+
+    # Define the target table name
+    table_name = 'your_table_name'
+
+    # Define your database configuration
+    db_config = {
+        'dbname': 'your_database_name',
+        'user': 'your_username',
+        'password': 'your_password',
+        'host': 'your_host',
+        'port': 'your_port'
+    }
+
+    # Call the function to import data
+    import_data_to_postgres(csv_file_path, table_name, db_config)
