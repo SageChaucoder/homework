@@ -1,12 +1,16 @@
+import pandas as pd
+from sqlalchemy import create_engine, text
 import os
+import psycopg2
 import csv
 import django
+import sys
 
 # Set up Django environment
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'library.settings')
 django.setup()
 
-from myapp.models import Employee, Product, Member
+from pages.models import Employee, Product, Member
 
 def import_csv(file_path):
     """
@@ -27,7 +31,7 @@ def cleanse_data(data, data_type):
             row['Age'] = int(row['Age'].strip())
             row['Position'] = row['Position'].strip()
             row['Department'] = row['Department'].strip()
-            row['Salary'] = float(row['Salary'].strip())
+            row['Salary'] = int(row['Salary'].strip())
         elif data_type == 'product':
             row['Name'] = row['Name'].strip()
             row['Category'] = row['Category'].strip()
@@ -54,27 +58,27 @@ def import_data_to_db(data, data_type):
     if data_type == 'employee':
         for row in data:
             Employee.objects.create(
-                name=row['Name'],
-                age=row['Age'],
-                position=row['Position'],
-                department=row['Department'],
-                salary=row['Salary']
+                Name=row['Name'],
+                Age=row['Age'],
+                Position=row['Position'],
+                Department=row['Department'],
+                Salary=row['Salary']
             )
     elif data_type == 'product':
         for row in data:
             Product.objects.create(
-                name=row['Name'],
-                category=row['Category'],
-                price=row['Price'],
-                quantity=row['Quantity']
+                Name=row['Name'],
+                Category=row['Category'],
+                Price=row['Price'],
+                Quantity=row['Quantity']
             )
     elif data_type == 'member':
         for row in data:
             Member.objects.create(
-                name=row['Name'],
-                age=row['Age'],
-                email=row['Email'],
-                location=row['Location']
+                Name=row['Name'],
+                Age=row['Age'],
+                Email=row['Email'],
+                Location=row['Location']
             )
 
 def main():

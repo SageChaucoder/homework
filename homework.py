@@ -80,10 +80,10 @@ if __name__ == "__main__":
     main()
 
     def import_data_to_postgres(csv_file_path, table_name, db_config):
-    #
-    Imports data from a CSV file into a PostgreSQL table.
+    
+    #imports data from a CSV file into a PostgreSQL table.
 
-    Args:
+    #Args:
         csv_file_path (str): Path to the CSV file.
         table_name (str): Name of the target PostgreSQL table.
         db_config (dict): Database configuration dictionary with keys 'dbname', 'user', 'password', 'host', and 'port'.
