@@ -83,9 +83,9 @@ def import_data_to_db(data, data_type):
 
 def main():
     files = [
-        ('CSV files 12-1-2025/Employees.csv', 'employee'),
-        ('CSV files 12-1-2025/Products.csv', 'product'),
-        ('CSV files 12-1-2025/Members.csv', 'member')
+        ('CSV files/Employees.csv', 'employee'),
+        ('CSV files/Products.csv', 'product'),
+        ('CSV files/Members.csv', 'member')
     ]
 
     for file_path, data_type in files:

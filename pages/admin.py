@@ -5,6 +5,6 @@ from django.contrib import admin
 from .models import Member, Product, Employee
 from import_export.admin import ImportExportModelAdmin
 
-admin.site.register(Member)
-admin.site.register(Product)
-admin.site.register(Employee)
+admin.site.register(Member, ImportExportModelAdmin)
+admin.site.register(Product, ImportExportModelAdmin)
+admin.site.register(Employee, ImportExportModelAdmin)

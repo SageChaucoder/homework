@@ -8,11 +8,17 @@ class Member(models.Model):
     Email = models.EmailField(max_length=100)
     Location = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.Name
+
 class Product(models.Model):
     Name = models.CharField(max_length=100)
     Category = models.CharField(max_length=100)
     Price = models.FloatField(default=0.00)
     Quantity = models.IntegerField()
+
+    def __str__(self):
+        return self.Name
 
 class Employee(models.Model):
     Name = models.CharField(max_length=100)
@@ -22,5 +28,5 @@ class Employee(models.Model):
     Salary = models.IntegerField()
 
     def __str__(self):
-        return self.name
+        return self.Name
 
